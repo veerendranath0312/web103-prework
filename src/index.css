@@ -56,7 +56,7 @@
   --info-foreground: #ffffff;
 
   /* Border and Input Colors - Dark */
-  --border: oklch(0.269 0 0);
+  --border: #262626;
   --input: oklch(0.269 0 0);
   --input-background: oklch(0.205 0 0);
   --switch-background: #cbced4;
@@ -119,27 +119,6 @@
   --disabled-cursor: not-allowed;
 
   /* ==========================================
-   * SHADOWS & ELEVATION
-   * ========================================== */
-
-  /* Standard Shadows - Dark */
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
-
-  /* Colored Shadows - Dark */
-  --shadow-colored: 0 10px 15px -3px rgba(139, 92, 246, 0.2),
-    0 4px 6px -4px rgba(139, 92, 246, 0.2);
-  --shadow-colored-lg: 0 20px 25px -5px rgba(139, 92, 246, 0.25),
-    0 8px 10px -6px rgba(139, 92, 246, 0.2);
-  --shadow-primary: 0 10px 15px -3px rgba(139, 92, 246, 0.2);
-  --shadow-secondary: 0 10px 15px -3px rgba(236, 72, 153, 0.2);
-
-  /* ==========================================
    * GLASS MORPHISM & EFFECTS
    * ========================================== */
 
@@ -186,78 +165,48 @@
   --line-height-readable: 1.6;
   --contrast-aa: 4.5;
   --contrast-aaa: 7;
+
+  /* Timing Functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Duration Scale */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 750ms;
+  --duration-slowest: 1000ms;
+
+  /* Common Transitions */
+  --transition-fast: var(--duration-fast) var(--ease-out);
+  --transition-normal: var(--duration-normal) var(--ease-out);
+  --transition-medium: var(--duration-medium) var(--ease-out);
+  --transition-slow: var(--duration-slow) var(--ease-out);
+  --transition-colors: color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+  --transition-transform: transform var(--duration-normal) var(--ease-out);
+  --transition-opacity: opacity var(--duration-normal) var(--ease-out);
+  --transition-shadow: box-shadow var(--duration-normal) var(--ease-out);
+  --transition-all: all var(--duration-normal) var(--ease-out);
 }
 
-/* ==========================================
- * LIGHT THEME OVERRIDES
- * ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-.light {
-  /* Core Semantic Colors - Light */
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
-  --destructive: #d4183d;
-  --destructive-foreground: #ffffff;
-  --warning: #f59e0b;
-  --warning-foreground: #ffffff;
-  --success: #10b981;
-  --success-foreground: #ffffff;
-  --info: #3b82f6;
-  --info-foreground: #ffffff;
-
-  /* Border and Input Colors - Light */
-  --border: rgba(0, 0, 0, 0.1);
-  --input: transparent;
-  --input-background: #f3f3f5;
-  --ring: oklch(0.708 0 0);
-
-  /* Background Gradients - Light */
-  --gradient-background: linear-gradient(
-    135deg,
-    var(--background) 0%,
-    #faf7ff 50%,
-    #fff7f9 100%
-  );
-  --gradient-card: linear-gradient(135deg, var(--card) 0%, #faf8ff 100%);
-  --gradient-glass: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 255, 255, 0.4) 100%
-  );
-
-  /* Interaction States - Light */
-  --hover-overlay: rgba(139, 92, 246, 0.05);
-  --hover-overlay-intense: rgba(139, 92, 246, 0.1);
-  --hover-border: rgba(139, 92, 246, 0.2);
-  --focus-ring: rgba(139, 92, 246, 0.3);
-
-  /* Glass Morphism - Light */
-  --glass-background: rgba(255, 255, 255, 0.8);
-  --glass-background-strong: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-border-strong: rgba(255, 255, 255, 0.3);
-
-  /* Shadows - Light */
-  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --shadow-colored: 0 10px 15px -3px rgba(139, 92, 246, 0.1),
-    0 4px 6px -4px rgba(139, 92, 246, 0.1);
-  --shadow-colored-lg: 0 20px 25px -5px rgba(139, 92, 246, 0.15),
-    0 8px 10px -6px rgba(139, 92, 246, 0.1);
+body {
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--foreground);
+  height: 100%;
+  min-height: 100vh;
 }

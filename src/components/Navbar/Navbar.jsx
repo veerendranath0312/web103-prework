@@ -1,34 +1,10 @@
-import { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router"
+import { useState } from "react"
+import { Link } from "react-router"
 import { Sparkles, House, Plus, Sun, MoonStar } from "lucide-react"
 import styles from "./Navbar.module.css"
 
 function Navbar() {
-  const location = useLocation()
   const [isDark, setIsDark] = useState(false)
-
-  useEffect(() => {
-    const theme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-
-    if (theme === "dark" || (!theme && prefersDark)) {
-      setIsDark(true)
-      document.documentElement.classList.add("dark")
-    }
-  }, [])
-
-  const toggleTheme = () => {
-    const newTheme = !isDark
-    setIsDark(newTheme)
-
-    if (newTheme) {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
-    }
-  }
 
   return (
     <header className={styles.header}>
@@ -67,11 +43,7 @@ function Navbar() {
           </div>
 
           <div className={styles.actions}>
-            <button
-              className={styles.themeToggle}
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-            >
+            <button className={styles.themeToggle} aria-label="Toggle theme">
               <div
                 className={styles.themeIcon}
                 style={{ transform: `rotate(${isDark ? 180 : 0}deg)` }}
