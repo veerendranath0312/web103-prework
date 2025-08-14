@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="" element={<ShowCreatorsPage />} />
           <Route path="add" element={<AddCreatorPage />} />
           <Route path="edit/:id" element={<EditCreatorPage />} />
-          <Route path="view/:id" element={<ViewCreatorPage />} />
+          <Route path="creator/:id" element={<ViewCreatorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

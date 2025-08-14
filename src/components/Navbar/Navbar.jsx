@@ -1,10 +1,9 @@
-import { useState } from "react"
-import { Link } from "react-router"
-import { Sparkles, House, Plus, Sun, MoonStar } from "lucide-react"
+import { Link, useLocation } from "react-router"
+import { Sparkles, House, Plus } from "lucide-react"
 import styles from "./Navbar.module.css"
 
 function Navbar() {
-  const [isDark, setIsDark] = useState(false)
+  const location = useLocation()
 
   return (
     <header className={styles.header}>
@@ -43,15 +42,6 @@ function Navbar() {
           </div>
 
           <div className={styles.actions}>
-            <button className={styles.themeToggle} aria-label="Toggle theme">
-              <div
-                className={styles.themeIcon}
-                style={{ transform: `rotate(${isDark ? 180 : 0}deg)` }}
-              >
-                {isDark ? <MoonStar size={16} /> : <Sun size={16} />}
-              </div>
-            </button>
-
             <Link to="/add" className={styles.mobileAddButton}>
               <Plus size={16} />
             </Link>

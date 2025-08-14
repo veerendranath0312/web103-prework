@@ -4,13 +4,8 @@
    * ========================================== */
 
   /* Base Font Settings */
-  --font-size: 14px;
-  --font-family-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+  --font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono",
-    Menlo, monospace;
-  --font-family-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-family: var(--font-family-sans);
 
   /* Typography Scale - T-Shirt Sizing */
   --text-xs: 0.75rem; /* 12px */
@@ -55,80 +50,25 @@
   --info: #3b82f6;
   --info-foreground: #ffffff;
 
-  /* Border and Input Colors - Dark */
+  /* Border Colors*/
   --border: #262626;
-  --input: oklch(0.269 0 0);
-  --input-background: oklch(0.205 0 0);
-  --switch-background: #cbced4;
-  --ring: oklch(0.439 0 0);
 
   /* ==========================================
    * GRADIENTS & PATTERNS
    * ========================================== */
 
-  /* Brand Gradients */
   --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
   --gradient-primary-hover: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
-  --gradient-secondary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
-  --gradient-tertiary: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%);
-
-  /* Background Gradients - Dark */
-  --gradient-background: linear-gradient(
-    135deg,
-    var(--background) 0%,
-    oklch(0.165 0.02 264) 50%,
-    oklch(0.155 0.015 320) 100%
-  );
   --gradient-card: linear-gradient(135deg, var(--card) 0%, oklch(0.165 0.01 264) 100%);
-  --gradient-glass: linear-gradient(
-    135deg,
-    rgba(37, 37, 37, 0.8) 0%,
-    rgba(37, 37, 37, 0.4) 100%
-  );
-
-  /* Radial Gradients */
-  --gradient-radial-primary: radial-gradient(circle at center, #8b5cf6 0%, #ec4899 70%);
-  --gradient-radial-secondary: radial-gradient(
-    ellipse at top,
-    #f3e8ff 0%,
-    transparent 70%
-  );
-
-  /* ==========================================
-   * INTERACTION STATES
-   * ========================================== */
-
-  /* Hover Effects - Dark */
-  --hover-overlay: rgba(139, 92, 246, 0.1);
-  --hover-overlay-intense: rgba(139, 92, 246, 0.15);
-  --hover-border: rgba(139, 92, 246, 0.3);
-  --hover-scale: 1.02;
-  --hover-lift: -2px;
-
-  /* Focus Effects - Dark */
-  --focus-ring: rgba(139, 92, 246, 0.4);
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 2px;
-
-  /* Active States */
-  --active-scale: 0.98;
-  --active-opacity: 0.8;
-
-  /* Disabled States */
-  --disabled-opacity: 0.5;
-  --disabled-cursor: not-allowed;
 
   /* ==========================================
    * GLASS MORPHISM & EFFECTS
    * ========================================== */
 
-  --glass-background: rgba(37, 37, 37, 0.8);
-  --glass-background-strong: rgba(37, 37, 37, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-border-strong: rgba(255, 255, 255, 0.15);
-  --backdrop-blur: 16px;
-  --backdrop-blur-sm: 8px;
-  --backdrop-blur-lg: 24px;
+  --navbar-glass-bg: rgba(37, 37, 37, 0.8);
+  --navbar-glass-border: rgba(255, 255, 255, 0.1);
+  --navbar-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --navbar-backdrop-blur: 24px;
 
   /* ==========================================
    * LAYOUT & CONTAINER SIZES
@@ -156,15 +96,8 @@
   --breakpoint-2xl: 1536px;
 
   /* ==========================================
-   * ACCESSIBILITY VARIABLES
+   * TRANSITION VARIABLES
    * ========================================== */
-
-  --focus-visible-outline: 2px solid var(--focus-ring);
-  --focus-visible-outline-offset: var(--focus-ring-offset);
-  --min-tap-target: 44px;
-  --line-height-readable: 1.6;
-  --contrast-aa: 4.5;
-  --contrast-aaa: 7;
 
   /* Timing Functions */
   --ease-linear: linear;
