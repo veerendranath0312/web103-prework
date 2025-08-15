@@ -1,9 +1,13 @@
 import { useState } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
+import { toast } from "sonner"
 import { Sparkles, Plus, ArrowLeft } from "lucide-react"
+
+import supabase from "../../lib/supabaseClient"
 import styles from "./AddCreator.module.css"
 
 export default function AddCreator() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     url: "",
@@ -15,6 +19,27 @@ export default function AddCreator() {
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    const { error } = await supabase.from("creators").insert([formData]).select()
+    if (error) {
+      toast.error("Error adding creator:", error.message)
+    } else {
+      toast.success("Creator added successfully!")
+      navigate("/")
+    }
+
+    setIsSubmitting(false)
+    setFormData({
+      name: "",
+      url: "",
+      description: "",
+      imageURL: "",
+    })
   }
 
   return (
@@ -44,7 +69,7 @@ export default function AddCreator() {
             </h2>
           </div>
           <div className={styles.cardContent}>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
                 <label htmlFor="name" className={`${styles.label} ${styles.required}`}>
                   Name

@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate, useParams } from "react-router"
+import { toast } from "sonner"
+
+import supabase from "../../lib/supabaseClient"
 import { ArrowLeft, SquarePen, Save, Trash2 } from "lucide-react"
 import styles from "../AddCreator/AddCreator.module.css" // Reusing the same styles
 
 export default function EditCreator() {
-  const [creator, setCreator] = useState({
-    id: "1",
-    name: "Marques Brownlee",
-    url: "https://www.youtube.com/@mkbhd",
-    description:
-      "MKBHD is one of the most respected tech reviewers on YouTube, known for his crisp video quality and in-depth analysis of the latest consumer technology. From smartphones to electric vehicles, his reviews help millions make informed purchasing decisions.",
-    imageURL:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-  })
+  const navigate = useNavigate()
+  const { id } = useParams()
+
   const [formData, setFormData] = useState({
     name: "",
     url: "",
@@ -22,17 +19,24 @@ export default function EditCreator() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
-    if (creator) {
-      setFormData({
-        name: creator.name,
-        url: creator.url,
-        description: creator.description,
-        imageURL: creator.imageURL || "",
-      })
-    }
-  }, [creator])
+    const fetchCreator = async () => {
+      const { data, error } = await supabase
+        .from("creators")
+        .select()
+        .eq("id", Number(id))
+        .single()
 
-  if (!creator) {
+      if (error) {
+        toast.error("Error fetching creator:", error.message)
+      } else {
+        setFormData(data)
+      }
+    }
+
+    fetchCreator()
+  }, [id])
+
+  if (!formData) {
     return (
       <div
         className={styles.container}
@@ -60,19 +64,41 @@ export default function EditCreator() {
     )
   }
 
-  const handleChange = () => {}
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({ ...prevData, [name]: value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    const { error } = await supabase
+      .from("creators")
+      .update(formData)
+      .eq("id", Number(id))
+
+    if (error) {
+      toast.error("Error updating creator:", error.message)
+    } else {
+      toast.success("Creator updated successfully!")
+      navigate(`/`)
+    }
+
+    setIsSubmitting(false)
+  }
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <Link to={`/creator/${creator.id}`} className={styles.backButton}>
+        <Link to={`/`} className={styles.backButton}>
           <ArrowLeft className={styles.backIcon} />
           Back to Creator
         </Link>
 
         <div className={styles.header}>
           <h1 className={styles.title}>Edit Creator</h1>
-          <p className={styles.subtitle}>Update {creator.name}&apos;s information</p>
+          <p className={styles.subtitle}>Update {formData.name}&apos;s information</p>
         </div>
 
         <div className={styles.card}>
@@ -83,7 +109,7 @@ export default function EditCreator() {
             </h2>
           </div>
           <div className={styles.cardContent}>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
                 <label htmlFor="name" className={`${styles.label} ${styles.required}`}>
                   Name
@@ -164,7 +190,7 @@ export default function EditCreator() {
                 </button>
 
                 <Link
-                  to={`/creator/${creator.id}`}
+                  to={`/creator/${id}`}
                   className={`${styles.button} ${styles.buttonOutline}`}
                 >
                   Cancel

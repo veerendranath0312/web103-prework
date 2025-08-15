@@ -1,18 +1,49 @@
-import { useState } from "react"
-import { Link } from "react-router"
+import { useState, useEffect } from "react"
+import { Link, useParams, useNavigate } from "react-router"
+import { toast } from "sonner"
 import { ArrowLeft, User, Globe, Trash2, ExternalLink, SquarePen } from "lucide-react"
+
+import supabase from "../../lib/supabaseClient"
 import styles from "./ViewCreator.module.css"
 
 export default function ViewCreator() {
+  const { id } = useParams()
+  const navigate = useNavigate()
   const [creator, setCreator] = useState({
-    id: "1",
-    name: "Marques Brownlee",
-    url: "https://www.youtube.com/@mkbhd",
-    description:
-      "MKBHD is one of the most respected tech reviewers on YouTube, known for his crisp video quality and in-depth analysis of the latest consumer technology. From smartphones to electric vehicles, his reviews help millions make informed purchasing decisions.",
-    imageURL:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+    name: "",
+    url: "",
+    description: "",
+    imageURL: "",
   })
+
+  useEffect(() => {
+    const fetchCreator = async () => {
+      const { data, error } = await supabase
+        .from("creators")
+        .select()
+        .eq("id", Number(id))
+        .single()
+
+      if (error) {
+        toast.error("Error fetching creator:", error)
+      } else {
+        setCreator(data)
+      }
+    }
+
+    fetchCreator()
+  }, [id])
+
+  const handleDelete = async () => {
+    const { error } = await supabase.from("creators").delete().eq("id", Number(id))
+
+    if (error) {
+      toast.error("Error deleting creator:", error.message)
+    } else {
+      toast.success("Creator deleted successfully!")
+      navigate("/")
+    }
+  }
 
   if (!creator) {
     return (
@@ -94,7 +125,10 @@ export default function ViewCreator() {
                 Edit Creator
               </Link>
 
-              <button className={`${styles.button} ${styles.buttonDestructive}`}>
+              <button
+                onClick={handleDelete}
+                className={`${styles.button} ${styles.buttonDestructive}`}
+              >
                 <Trash2 className={styles.buttonIcon} />
                 Delete Creator
               </button>
